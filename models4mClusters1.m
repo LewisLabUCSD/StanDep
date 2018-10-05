@@ -1,5 +1,8 @@
 function [geneTis,cutOff,thr] = models4mClusters1(clustObj,tisNames,model,xedge,folderName,cutOff,figFlag)
 
+muData = clustObj.Data; muData(muData==-inf) = [];
+muData = reshape(muData,numel(muData),1);
+muData = mean(muData);
 if isempty(cutOff)
     cutOff = clusterVariability1(clustObj,xedge,figFlag);
 %     data = reshape(clustObj.Data,numel(clustObj.Data),1); data(data==-inf) = 0;
@@ -41,6 +44,9 @@ for i=1:nClust
     coltis(remi) = []; colgene(remi) = [];
     clustData(remi) = [];
     thr(i,1) = prctile(clustData,roundn(cutOff(i),-2));
+	if cutOff(i)==100
+        thr(i,1) = muData;
+    end
     ind = clustData >= thr(i);
     fprintf('fraction selected = %0.4f\n',sum(ind)/(sum(gid)*nTis));
     coltis = coltis(ind);

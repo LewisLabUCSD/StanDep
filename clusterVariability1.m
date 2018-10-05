@@ -85,6 +85,7 @@ term2 = (m-muData); %term2(term2 < 0) = 0;
 cutOff = term1 - term2;
 % cutOff = term1;
 cutOff = (cutOff-min(cutOff))/max(cutOff-min(cutOff))*100;
+cx = find(cutOff==100);
 [c,ic] = sort(cutOff,'ascend');
 uci = uci(ic);
 
@@ -94,7 +95,11 @@ for i=1:length(uci)
     temp = v(gid,:);
     temp(temp==-inf) = [];
     temp = reshape(temp,numel(temp),1);
-    thrval(i) = prctile(temp,cutOff(i));
+    if i==cx
+        thrval(i)=muData;
+    else
+        thrval(i) = prctile(temp,cutOff(i));
+    end
 end
 
 if figFlag
