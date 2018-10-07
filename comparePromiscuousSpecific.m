@@ -1,5 +1,18 @@
-function [enzymeData] = comparePromiscuousSpecific(spec,prom,modelData)
+function [enzymeData] = comparePromiscuousSpecific(spec,prom,modelData,varargin)
 
+%% See if figure should be plotted or not
+numvarargs = length(varargin);
+if numvarargs > 1
+    error('TooManyInputs', ...
+        'requires at most 1 optional inputs');
+end
+% set defaults for optional inputs
+optargs = {true};
+optargs(1:numvarargs) = varargin;
+% Place optional args as variable names
+[to_plot] = optargs{:};
+
+%% 
 % comparing distributions of specialist & promiscuous enzymes
 specSubunits = regexp(spec.enzymes,' & ','split');
 promSubunits = regexp(prom.enzymes,' & ','split');
@@ -27,7 +40,11 @@ promExprVec = reshape(promExprMatrix,numel(promExprMatrix),1);
 specExprVec(specExprVec==-1) = [];
 promExprVec(promExprVec==-1) = [];
 
-figure;
+if to_plot
+    figure;
+else
+    figure('visible','off');
+end
 hold on
 histogram(log10(specExprVec),'BinEdges',[-8:0.25:5],'DisplayStyle','stairs');
 histogram(log10(promExprVec),'BinEdges',[-8:0.25:5],'DisplayStyle','stairs');
