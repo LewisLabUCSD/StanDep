@@ -1,10 +1,23 @@
-function [geneTis,cutOff,thr] = models4mClusters1(clustObj,tisNames,model,xedge,folderName,cutOff,figFlag)
+function [geneTis,cutOff,thr] = models4mClusters1(clustObj,tisNames,model,xedge,folderName,cutOff,figFlag,varargin)
 
+%% See if fraction selection should be printed or not
+numvarargs = length(varargin);
+if numvarargs > 1
+    error('TooManyInputs', ...
+        'requires at most 1 optional inputs');
+end
+% set defaults for optional inputs
+optargs = {true,false};
+optargs(1:numvarargs) = varargin;
+% Place optional args as variable names
+[printFlag,writeFlag] = optargs{:};
+
+%%
 muData = clustObj.Data; muData(muData==-inf) = [];
 muData = reshape(muData,numel(muData),1);
 muData = mean(muData);
 if isempty(cutOff)
-    cutOff = clusterVariability1(clustObj,xedge,figFlag);
+    cutOff = clusterVariability1(clustObj,xedge,figFlag,printFlag);
 %     data = reshape(clustObj.Data,numel(clustObj.Data),1); data(data==-inf) = 0;
 %     thr = prctile(data,cutOff);
 end
@@ -48,7 +61,9 @@ for i=1:nClust
         thr(i,1) = muData;
     end
     ind = clustData >= thr(i);
-    fprintf('fraction selected = %0.4f\n',sum(ind)/(sum(gid)*nTis));
+    if printFlag
+        fprintf('fraction selected = %0.4f\n',sum(ind)/(sum(gid)*nTis));
+    end
     coltis = coltis(ind);
     colgene = colgene(ind);
     for j=1:nTis
@@ -79,13 +94,17 @@ for i=1:nClust
 %     end
     if ~isempty(folderName)
         Jc = getJaccardSimMatrix(clustMat);
-        writeMyMatrix(Jc,strcat(folderName,'/C',num2str(i),'.txt'));
+        if writeFlag
+            writeMyMatrix(Jc,strcat(folderName,'/C',num2str(i),'.txt'));
+        end
         if i==1
             Z = linkage(Jc,'complete');
             Y = pdist(Jc,'euclidean');
             leafOrderg = optimalleaforder(Z,Y);
-            fprintf('Cophenetic correlation coeffcient using %s linkage and %s distance = %0.4f\n',...
-                'complete','euclidean',cophenet(Z,Y));
+            if printFlag
+                fprintf('Cophenetic correlation coeffcient using %s linkage and %s distance = %0.4f\n',...
+                    'complete','euclidean',cophenet(Z,Y));
+            end
             if figFlag
                 figure;
                 [Hg,Tg,outpermg] = dendrogram(Z,0,'Orientation','left','labels',tisNames,'Reorder',leafOrderg);
@@ -96,7 +115,9 @@ for i=1:nClust
 end
 
 J = getJaccardSimMatrix(geneTis);
-writeMyMatrix(J,strcat(folderName,'/Call.txt'));
+if writeFlag
+    writeMyMatrix(J,strcat(folderName,'/Call.txt'));
+end
 
 if figFlag
     Z = linkage(J,'complete');
@@ -161,7 +182,6 @@ for i=1:n
 end
 
 function writeMyMatrix(A,fileName)
-
 fid = fopen(fileName,'wt');
 
 for ii = 1:size(A,1)

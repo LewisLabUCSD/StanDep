@@ -1,5 +1,19 @@
-function [cutOff,thrval,m,s,term1,term2,stdExpr,meanExpr] = clusterVariability1(clustObj,xedge,figFlag)
+function [cutOff,thrval,m,s,term1,term2,stdExpr,meanExpr] = clusterVariability1(clustObj,xedge,figFlag,varargin)
 
+%% Initialize optional params
+numvarargs = length(varargin);
+if numvarargs > 1
+    error('TooManyInputs', ...
+        'requires at most 1 optional input');
+end
+
+% set defaults for optional inputs
+optargs = {true};
+optargs(1:numvarargs) = varargin;
+% Place optional args as variable names
+[printFlag] = optargs{:};
+
+%%
 % % zscore the entire data
 % nTis = size(clustObj.Data,2);
 % nGenes = size(clustObj.Data,1);
@@ -25,11 +39,15 @@ for i=1:length(cidx)
 end
 muData = clustObj.Data; muData(muData==-inf) = [];
 muData = reshape(muData,numel(muData),1);
-fprintf('Top 25th percentile for the data = %0.4f\n',prctile(muData,75));
 muData = mean(muData);
-fprintf('Mean of Data = %0.4f\n',muData);
 sigData = sqrt(mean(varExpr));
-fprintf('Std. Dev. of Data = %0.4f\n',sigData);
+
+if printFlag
+    fprintf('Top 25th percentile for the data = %0.4f\n',prctile(muData,75));
+    fprintf('Mean of Data = %0.4f\n',muData);
+    fprintf('Std. Dev. of Data = %0.4f\n',sigData);
+end
+
 s = zeros(length(uci),1); m = s; mu_sm = s; noi = s;
 if figFlag
     figure;
