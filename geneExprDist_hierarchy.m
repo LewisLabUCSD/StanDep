@@ -1,6 +1,18 @@
-function [clustObj,Z,Hg,Tg,outpermg,tisMat,rowNames] = geneExprDist_hierarchy(exprData,removeObjects,edgeX,k,model,distMethod,linkageMethod)
+function [clustObj,Z,Hg,Tg,outpermg,tisMat,rowNames] = geneExprDist_hierarchy(exprData,removeObjects,edgeX,k,model,distMethod,linkageMethod,varargin)
 
+%% See if figure should be plotted or not
+numvarargs = length(varargin);
+if numvarargs > 1
+    error('TooManyInputs', ...
+        'requires at most 1 optional inputs');
+end
+% set defaults for optional inputs
+optargs = {true};
+optargs(1:numvarargs) = varargin;
+% Place optional args as variable names
+[to_plot] = optargs{:};
 
+%% 
 if isfield(exprData,'value')
     exprData.valuebyTissue = exprData.value;
     clear exprData.value
@@ -58,11 +70,18 @@ Y = pdist(Yhist,distMethod);
 Z = linkage(Y,linkageMethod);
 % Y = pdist(Yhist,distMethod);
 leafOrderg = optimalleaforder(Z,Y);
-fprintf('Cophenetic correlation coeffcient using %s linkage and %s distance = %0.4f\n',...
-    linkageMethod,distMethod,cophenet(Z,Y));
+
+%fprintf('Cophenetic correlation coeffcient using %s linkage and %s distance = %0.4f\n',...
+%    linkageMethod,distMethod,cophenet(Z,Y));
+
 % idx = cluster(Z,'maxclust',k,'criterion','distance');
 % cObj = clustergram(Yhist);
-figure;
+if to_plot
+    figure;
+else
+    figure('visible','off');
+end
+
 [Hg,Tg,outpermg] = dendrogram(Z,k,'Orientation','left','Reorder',leafOrderg);
 idxg = Tg;
 
@@ -140,7 +159,11 @@ end
 % figure;
 % silhouette(Yhist,idx,distMethod);
 
-figure;
+if to_plot
+    figure;
+else
+    figure('visible','off');
+end
 cbg = cubehelix(nTis+1,0.6,-0.9,1.9,1.1,[0.2 0.8],[0.4 0.8]);
 for i=1:k
     subplot(nrow,ncol,i);
@@ -176,7 +199,11 @@ for i=1:k
     ylabel('# of tissues');
 end
 
-figure;
+if to_plot
+    figure;
+else
+    figure('visible','off');
+end
 tisMat = []; % initialize tissueMatrix
 rowNames = [];
 r = mod(nTis,4);
