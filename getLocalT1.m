@@ -10,9 +10,9 @@ else
     localThsVal1 = 10^(prctile(linData,localThs));
     maxGene = max(rawData,[],2);
     meanGene = mean(rawData,2);
-    localGeneThs = maxGene;
+    localGeneThs = maxGene+1;
     localGeneThs(meanGene>=localThsVal1) = meanGene(meanGene>=localThsVal1);
-    localGeneThs = sort(localGeneThs,'ascend');
+%     localGeneThs = sort(localGeneThs,'ascend');
     % make selection of gene/enzyme-tissue pairs
     if tisid==0
         rxnTisMat = zeros(length(model.rxns),size(rawData,2));

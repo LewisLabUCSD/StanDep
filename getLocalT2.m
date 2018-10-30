@@ -14,7 +14,7 @@ else
     localGeneThs = meanGene;
     localGeneThs(meanGene>=localThsVal2) = localThsVal2;
     localGeneThs(meanGene<localThsVal1) = localThsVal1+1;
-    localGeneThs = sort(localGeneThs,'ascend');
+%     localGeneThs = sort(localGeneThs,'ascend');
     % make selection of gene-tissue pairs
     if tisid==0
         rxnTisMat = zeros(length(model.rxns),size(rawData,2));
