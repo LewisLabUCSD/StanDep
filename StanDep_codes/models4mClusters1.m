@@ -1,4 +1,45 @@
 function [geneTis,enzTis,cutOff,thr,enzSel,tisClust] = models4mClusters1(clustObj,tisNames,model,xedge,folderName,cutOff,figFlag,adjustValue,weightage)
+% USAGE:
+% % [geneTis,enzTis,cutOff,thr,enzSel,tisClust] = models4mClusters1(clustObj,tisNames,model,xedge,folderName,cutOff,figFlag,adjustValue,weightage)
+
+% INPUTS:
+% % clustObj:       a structure containing information about the clusters
+                    % % Distribution: contains gene-specific distributions using bins provided
+                    % % objects: gene/enzyme names provided
+                    % % objectMaps: only exists if enzymes were used, contains list of
+                        % % reactions catalyzed by the model. This is also must be calculated before
+                        % % and provided in exprData.
+                    % % cindex: cluster indices [1,k]
+                    % % Data: Original data
+                    % % C: mean vector of the cluster
+                    % % numObjInClust: number of genes/enzymes in each cluster
+                    % % altObjects: any other alternative gene names also supplied with the exprData
+% % tisNames:       list of tissue or context names/ids
+% % model:          genome-scale model to be used
+% % xedge:          the bins of expression value to be used generating figure
+% % foldername:     if not writing a file, []; else, give folder location
+% % cutOff:         if using StanDep code for calculating thresholds, [].
+% % figFlag:        print the figure, true; else, false
+% % adjustValue:    if want to adjust thresholds across all clusters by a
+                        % % certain value provide it here, else 0.
+% % weightage:      to give different weightage to standard deviation and
+                        % % mean terms, else say [1 1].
+                        
+% OUTPUTS:
+% % geneTis:        if using enzyme clusters in clustObj, contains
+                        % % selection of reactions; if using genes in clustObj, contains selection of
+                        % % genes across tissues.
+% % enzTis:         contains enzymes used in each tissue, ignore this if
+                        % % using gene clusters
+% % cutOff:         cutOffs calculated using clusterVariability1.m in percentile of each cluster
+% % thr:            threshold in absolute values of expression units
+% % enzSel:         the enzyme in the tissue comes from which cluster
+% % tisClust:       a tissue cluster object structure
+                    % % outperm/H/T:outputs of dendrogram (see MATLAB function)
+                    % % tisNames:   tissue names
+
+% AUTHOR:
+% % Chintan Joshi:  for StanDep paper (May 2018)
 
 muData = clustObj.Data; muData(muData==-inf) = [];
 muData = reshape(muData,numel(muData),1);
