@@ -1,4 +1,43 @@
-function [clustObj,Z,Hg,Tg,outpermg,tisMat,rowNames] = geneExprDist_hierarchy(exprData,removeObjects,edgeX,k,model,distMethod,linkageMethod)
+function [clustObj,Z,Hg,Tg,outpermg] = geneExprDist_hierarchy(exprData,removeObjects,edgeX,k,distMethod,linkageMethod)
+% USAGE: 
+% % [clustObj,Z,Hg,Tg,outpermg,tisMat,rowNames] = geneExprDist_hierarchy(exprData,removeObjects,edgeX,k,distMethod,linkageMethod)
+
+% INPUTS:
+% % exprData:       a structure containing expression data (gene/enzyme)
+                    % % gene/enzyme: list of gene/enzyme names
+                    % % value/valuebyTissue: a matrix whose each column
+                        % % contains the expression of genes/enzymes across a tissue/context and 
+                        % % each row contains expression of a gene across
+                        % % all tissues/contexts.
+                    % % rxns:  only needed if enzyme information was used, list of reactions 
+                        % % catalyzed by each of the enzymes.
+                    % % genesymbols: any alternative gene names that the
+                        % % user may want to keep track of.
+% % removeObjects:  names of genes or enzymes that need to be removed or
+                    % % else give [].
+% % edgeX:          give bins acros which distributions are to be
+                    % % calculated (required)
+% % k:              number of clusters for hierarchical clustering
+% % distMethod:     distance method see MATLAB pdist function
+% % linkageMethod:  linkage method, see MATLAB linkage function
+
+% OUTPUTS:
+% % clustObj:       a structure containing information about the clusters
+                    % % Distribution: contains gene-specific distributions using bins provided
+                    % % objects: gene/enzyme names provided
+                    % % objectMaps: only exists if enzymes were used, contains list of
+                        % % reactions catalyzed by the model. This is also must be calculated before
+                        % % and provided in exprData.
+                    % % cindex: cluster indices [1,k]
+                    % % Data: Original data
+                    % % C: mean vector of the cluster
+                    % % numObjInClust: number of genes/enzymes in each cluster
+                    % % altObjects: any other alternative gene names also supplied with the exprData
+% % Z:              output of linkage.
+% % Hg/Tg/outpermg: outputs of dendrogram (see MATLAB dendrogram function).
+
+% AUTHOR:
+% % Chintan Joshi:  for StanDep paper (May 2018)
 
 
 if isfield(exprData,'value')
