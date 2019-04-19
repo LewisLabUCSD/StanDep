@@ -1,5 +1,22 @@
 function [H,M] = getMBAsets(clustObj,edgeX,model,tol)
 
+% USAGE:
+% % [H,M] = getMBAsets(clustObj,edgeX,model,tol)
+% % code needed to calculate inputs for MBA
+
+% INPUTS:
+% % clustObj:   cluster object calculated in geneExprDist_hierarchy
+% % edgeX:      bins used in clustObj
+% % model:      a COBRA model to be used
+% % tol:        a tolerance within which medium confidence reactions are placed
+
+% OUTPUTS:
+% % H:          a matrix describing whether a reaction is high confidence
+% % M:          a matrix describing whether a reaction is medium confidence
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 objDist_lb = zeros(size(clustObj.Data));
 objDist_ub = objDist_lb;
 H = objDist_lb;

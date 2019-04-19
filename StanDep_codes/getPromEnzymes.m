@@ -1,5 +1,17 @@
 function [prom] = getPromEnzymes(model)
 
+% USAGE:
+% % [prom] = getPromEnzymes(model)
+
+% INPUTS:
+% % model:      a COBRA model for which a list of promiscuous enzymes are desired
+
+% OUTPUTS:
+% % prom:       a structure containing information about promiscuous enzymes
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 % parse and arrange GPRs
 parsedGPR = GPRparser(model);
 [parsedGPR,ix] = linearization_index(parsedGPR,'rows');

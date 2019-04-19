@@ -1,4 +1,22 @@
-function [rxnTisMat,globalSel,nGlobalSel] = getGlobal_case(modelData,model,globalThs)
+function [rxnTisMat] = getGlobal_case(modelData,model,globalThs)
+
+% USAGE:
+% % [rxnTisMat] = getGlobal_case(modelData,model,globalThs)
+
+% INPUTS:
+% % modelData:  gene expression data
+                    % % value: a matrix of gene (rows) expression in conditions (cols)
+                    % % gene: list of genes
+                    % % Tissue: list of conditions
+% % model:      a COBRA model where gene formats are same as modelData
+% % globalThs:  threshold value in percentile [0 100].
+
+% OUTPUTS:
+% % rxnTisMat:  a binary matrix indicating whether a reaction (row) is on a given condition (cols)
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+% %                 ......implemented as Anne Richelle, please contact her
 
 rawData = modelData.value;
 linData = log10(reshape(rawData,numel(rawData),1));

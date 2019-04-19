@@ -1,5 +1,27 @@
 function [J,J2d,J1,J2] = compareTwoTissueSets(set1,set2,typeFlag,tissues,figFlag)
 
+% USAGE:
+% % [J,J2d,J1,J2] = compareTwoTissueSets(set1,set2,typeFlag,tissues,figFlag)
+
+% INPUTS:
+% % set1:       inputs for set1 
+% % set2:       inputs for set2
+% % typeFlag:   format of input sets
+                % % list, if set1/2 is a cell array of cell arrays.
+                % % matrix, if set1/2 is a double(binary) or logical matrix
+                % % struct-rxns', if set1/2 is a cell array of COBRA models and reaction similarity is desired
+                % % struct-rxns', if set1/2 is a cell array of COBRA models and gene similarity is desired
+% % figFlag:    true, plot the figure, else false
+
+% OUTPUTS:
+% % J:          Jaccard similarity matrix across sets for same condition
+% % J2d:        Jaccard similarity matrix across sets and conditions
+% % J1:         Jaccard similairt matrix across conditions for set1
+% % J2:         Jaccard similairt matrix across conditions for set2
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 tissues = strrep(tissues,'_','-');
 if strcmp(typeFlag,'list')
     J = zeros(length(set1),1);
