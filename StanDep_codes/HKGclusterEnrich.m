@@ -1,5 +1,20 @@
 function [pEnr,cnts] = HKGclusterEnrich(clustObj,hkGenes)
 
+% USAGE:
+% % [pEnr,cnts] = HKGclusterEnrich(clustObj,hkGenes)
+
+% INPUTS:
+% % clustObj:   cluster objected created by geneExprDist_hierarchy
+% % hkGenes:    list of housekeeping genes
+
+% OUTPUTS:
+% % pEnr:       pvalues for each cluster indicating whether housekeeping
+                % % genes were enriched in that cluster
+% % cnts:       coverage of housekeeping genes in each cluster
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 nc = size(clustObj.C,1);
 ia = ismember(clustObj.objects,hkGenes);
 cidxHKG = clustObj.cindex(ia);

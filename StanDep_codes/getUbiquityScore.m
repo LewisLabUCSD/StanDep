@@ -1,5 +1,21 @@
 function [ubiScore,uScore] = getUbiquityScore(clustObj,edgeX,model)
 
+% USAGE:
+% % [ubiScore,uScore] = getUbiquityScore(clustObj,edgeX,model)
+% % code needed to calculate inputs for mCADRE
+
+% INPUTS:
+% % clustObj:   cluster object calculated in geneExprDist_hierarchy
+% % edgeX:      bins used in clustObj
+% % model:      a COBRA model to be used
+
+% OUTPUTS:
+% % ubiScore:   a matrix describing ubiquity score of each reaction
+% % uScore:     a matrix describing ubiquity score of enzymes
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 objDist = zeros(size(clustObj.Data));
 uci = 1:1:size(clustObj.C,1);
 cidx = clustObj.cindex;

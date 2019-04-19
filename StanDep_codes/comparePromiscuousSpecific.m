@@ -1,5 +1,20 @@
 function [enzymeData] = comparePromiscuousSpecific(spec,prom,modelData)
 
+% USAGE:
+% % [enzymeData] = comparePromiscuousSpecific(spec,prom,modelData)
+% % calculates enzyme expression data
+
+% INPUTS:
+% % spec:       a specialist enzyme structure (see getSpecialistEnzymes)
+% % prom:       a promiscuous enzyme structure (see getPromEnzymes)
+% % modelData:  data for all the genes in the model
+
+% OUTPUTS:
+% % enzymeData:enzyme expression data for all the genes in the model
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 % comparing distributions of specialist & promiscuous enzymes
 specSubunits = regexp(spec.enzymes,' & ','split');
 promSubunits = regexp(prom.enzymes,' & ','split');

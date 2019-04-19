@@ -1,5 +1,17 @@
 function [spec] = getSpecialistEnzymes(model)
 
+% USAGE:
+% % [spec] = getSpecialistEnzymes(model)
+
+% INPUTS:
+% % model:      a COBRA model for which a list of specialist enzymes are desired
+
+% OUTPUTS:
+% % spec:       a structure containing information about specialist enzymes
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 % parse and arrange GPRs (needed COBRA toolbox)
 parsedGPR = GPRparser(model);
 [parsedGPR,ix] = linearization_index(parsedGPR,'rows');

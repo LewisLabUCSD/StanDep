@@ -1,4 +1,29 @@
 function [J,outperm] = calcJaccardSimilarity(A,tisNames,typeFlag,figFlag)
+% USAGE:
+% % [J,outperm] = calcJaccardSimilarity(A,tisNames,typeFlag,figFlag)
+
+% INPUTS:
+% % A:          Either a cell array of COBRA models or a binary matrix (logical or double)
+                    % % if matrix, rows: elements, cols: condition
+                    
+% % tisNames:   list of tissue or context names/ids
+% % typeFlag:   'matrix'|'struct-rxns'|'struct-genes'; 
+                    % % matrx: if the input is a binary/logical matrix
+                    % % struct-rxns: if the input is a cell array of models
+                    % % and reaction similarity is desired
+                    % % struct-genes: if the input is a cell array of
+                    % % models and gene similarity is desired.
+% % figFlag:    true, if the user wants to plot the graph, else false
+                        
+% OUTPUTS:
+% % J:        if using enzyme clusters in clustObj, contains
+                        % % selection of reactions; if using genes in clustObj, contains selection of
+                        % % genes across tissues.
+% % outperm: contains enzymes used in each tissue, ignore this if
+                        % % using gene clusters
+
+% AUTHOR:
+% % Chintan Joshi:  for StanDep paper (May 2018)
 
 nTis = length(tisNames);
 J = zeros(nTis,nTis);

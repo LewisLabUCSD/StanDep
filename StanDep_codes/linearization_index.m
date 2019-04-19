@@ -1,5 +1,20 @@
 function [A,index] = linearization_index(A,flag)
 
+% USAGE:
+% % [A,index] = linearization_index(A,flag)
+
+% INPUTS:
+% % A:          a cell array of cell arrays
+% % flag:       'cols', if each element is of the form {nx1 cell}
+                % % 'rows' if each element is of the form {1xn cell}
+
+% OUTPUTS:
+% % A:          a cell array where subcell arrays have been opened and concatenated
+% % index:      a numeric describing index mapping from old A to new A
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 cnt = 0;
 index = zeros(1,1);
 if iscell(A{1,1})

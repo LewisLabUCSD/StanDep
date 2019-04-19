@@ -1,5 +1,42 @@
 function [cutOff,thrval,m,s,term1,term2,term3,stdExpr,meanExpr] = clusterVariability1(clustObj,xedge,figFlag,adjustValue,weightage)
 
+% USAGE:
+% % [geneTis,enzTis,cutOff,thr,enzSel,tisClust] = models4mClusters1(clustObj,tisNames,model,xedge,folderName,cutOff,figFlag,adjustValue,weightage)
+
+% INPUTS:
+% % clustObj:       a structure containing information about the clusters
+                    % % Distribution: contains gene-specific distributions using bins provided
+                    % % objects: gene/enzyme names provided
+                    % % objectMaps: only exists if enzymes were used, contains list of
+                        % % reactions catalyzed by the model. This is also must be calculated before
+                        % % and provided in exprData.
+                    % % cindex: cluster indices [1,k]
+                    % % Data: Original data
+                    % % C: mean vector of the cluster
+                    % % numObjInClust: number of genes/enzymes in each cluster
+                    % % altObjects: any other alternative gene names also supplied with the exprData
+% % xedge:          the bins of expression value to be used generating figure
+% % figFlag:        print the figure, true; else, false
+% % adjustValue:    if want to adjust thresholds across all clusters by a
+                        % % certain value provide it here, else 0.
+% % weightage:      to give different weightage to standard deviation and
+                        % % mean terms, else say [1 1].
+                        
+% OUTPUTS:
+% % cutOff:         cutOffs calculated using clusterVariability1.m in percentile of each cluster
+% % thrVal:         threshold in absolute values of expression units
+% % m:              mean of each cluster
+% % s:              standard deviation of each cluster
+% % term1:          value of first term in each cluster
+% % term2:          value of second term in each cluster
+% % stdExpr:        standard deviation of each entity in data (gene/enzyme/reaction)
+% % meanExpr:       mean of each entity in data (gene/enzyme/reaction)
+                    % % outperm/H/T:outputs of dendrogram (see MATLAB function)
+                    % % tisNames:   tissue names
+
+% AUTHOR:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 cidx = clustObj.cindex;
 uci = 1:1:size(clustObj.C,1);
 

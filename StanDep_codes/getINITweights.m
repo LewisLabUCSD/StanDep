@@ -1,5 +1,20 @@
 function enzWeights = getINITweights(clustObj,edgeX,model)
 
+% USAGE:
+% % enzWeights = getINITweights(clustObj,edgeX,model)
+% % code needed to calculate inputs for INIT
+
+% INPUTS:
+% % clustObj:   cluster object calculated in geneExprDist_hierarchy
+% % edgeX:      bins used in clustObj
+% % model:      a COBRA model to be used
+
+% OUTPUTS:
+% % enzWeights: a matrix describing enzyme weights for each reaction
+
+% AUTHORS:
+% % Chintan Joshi:  for StanDep paper (May 2018)
+
 objDist = zeros(size(clustObj.Data));
 uci = 1:1:size(clustObj.C,1);
 cidx = clustObj.cindex;
