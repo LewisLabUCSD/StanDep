@@ -1,20 +1,19 @@
 # StanDep
-Codes for "StanDep: capturing transcriptomic variability improves context-specific metabolic models "
+Codes for "StanDep: capturing transcriptomic variability improves context-specific metabolic models "   
 Chintan J. Joshi, Song-Min Schinn, Anne Richelle, Isaac Shamie, Eyleen J. O’Rourke, Nathan E. Lewis
 
 # NOTES:
-1. Do not add depreicated folder
-2. You must have cobra toolbox on MATLAB
+1. Do not add depreicated folder  
+2. You must have cobra toolbox on MATLAB  
 
 # Loading transcriptomics data (rnaData)
-1. The transcriptomics data is required as a MATLAB structure containing following fields:
-  a. gene: list of gene names
-  b. value: a matrix whose each column contains the expression of genes across a tissue/context and each row contains expression of a gene across all tissues/contexts.
-  c. genesymbols (optional): any alternative gene names that the user may want to keep track of.
-  d. Tissue: names of conditions
+1. The transcriptomics data is required as a MATLAB structure containing following fields:   
+  a. gene: list of gene names    
+  b. value: a matrix whose each column contains the expression of genes across a tissue/context and each row contains expression of a gene across all tissues/contexts     
+  c. genesymbols (optional): any alternative gene names that the user may want to keep track of   
+  d. Tissue: names of conditions   
 
-2. exprData should contain only those entities that are in the model (genes/enzymes).
-3. You must have access to the genome-scale model you want to use for integration.
+2. You must have access to the genome-scale model you want to use for integration.
 
 # To get the active core reaction lists for the conditions follow the code below:
 % % initialize COBRA toolbox  
