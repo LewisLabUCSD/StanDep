@@ -18,12 +18,15 @@ Chintan J. Joshi, Song-Min Schinn, Anne Richelle, Isaac Shamie, Eyleen J. O’Ro
 
 # To get the active core reaction lists for the conditions follow the code below:
 % % initialize COBRA toolbox
+
 initCobraToolbox
 
 % % extract expression data of the genes in the model
+
 modelData = getModelData(rnaData,model);
 
 % % calculate enzymes in the model
+
 spec = getSpecialistEnzymes(model);
 prom = getPromEnzymes(model);
 
