@@ -17,7 +17,7 @@ function [geneTis,enzTis,cutOff,thr,enzSel,tisClust] = models4mClusters1(clustOb
 % % tisNames:       list of tissue or context names/ids
 % % model:          genome-scale model to be used
 % % xedge:          the bins of expression value to be used generating figure
-% % foldername:     if not writing a file, []; else, give folder location
+% % foldername:     if not writing a file, []; else, give folder location (even if using current working directory)
 % % cutOff:         if using StanDep code for calculating thresholds, [].
 % % figFlag:        print the figure, true; else, false
 % % adjustValue:    if want to adjust thresholds across all clusters by a
@@ -94,7 +94,9 @@ for i=1:nClust
 end
 enzTis = geneTis;
 J = getJaccardSimMatrix(geneTis);
-writeMyMatrix(J,strcat(folderName,'/Call.txt'));
+if ~isempty(folderName)
+    writeMyMatrix(J,strcat(folderName,'/Call.txt'));
+end
 tisClust = [];
 if figFlag
     Z = linkage(J,'complete');
