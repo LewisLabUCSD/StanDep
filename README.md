@@ -62,6 +62,6 @@ calcJaccardSimilarity(coreRxnMat,enzymeData.Tissue,'matrix',true);
 ```
 ubiScore = getUbiquityScore(clustObj,edgeX,model); % calculate ubiquity score
 ```
+run mCADRE by using the above value for the input variable "ubiquityScore"  
 
-**run mCADRE by using the above value for the input variable "ubiquityScore"  
-Similarly other extraction methods can be tailored as well.**  
+**Similarly other extraction methods can be tailored as well.**  
