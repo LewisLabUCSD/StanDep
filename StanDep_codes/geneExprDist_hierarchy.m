@@ -36,6 +36,11 @@ function [clustObj,Z,Hg,Tg,outpermg] = geneExprDist_hierarchy(exprData,removeObj
 % % Z:              output of linkage.
 % % Hg/Tg/outpermg: outputs of dendrogram (see MATLAB dendrogram function).
 
+% NOTE:
+% % The code uses cubehelix for getting colors, please feel free to
+% % download it from MATLAB FileExchange (link below):
+% % https://www.mathworks.com/matlabcentral/fileexchange/43700-cubehelix-colormap-generator-beautiful-and-versatile
+
 % AUTHOR:
 % % Chintan Joshi:  for StanDep paper (May 2018)
 
