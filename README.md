@@ -5,7 +5,7 @@ Chintan J. Joshi, Song-Min Schinn, Anne Richelle, Isaac Shamie, Eyleen J. O’Ro
 # NOTES:
 1. Do not add depreicated folder  
 2. You must have cobra toolbox on MATLAB  
-3. ```geneExprDist_hierarchy``` uses CubeHelix from MatLAB FileExchange by Stephen Cobeldick (https://www.mathworks.com/matlabcentral/fileexchange/43700-cubehelix-colormap-generator-beautiful-and-versatile)
+3. ```geneExprDist_hierarchy``` uses CubeHelix from MATLAB FileExchange by Stephen Cobeldick (https://www.mathworks.com/matlabcentral/fileexchange/43700-cubehelix-colormap-generator-beautiful-and-versatile)
 
 # Loading transcriptomics data (rnaData)
 1. The transcriptomics data is required as a MATLAB structure containing following fields:   
