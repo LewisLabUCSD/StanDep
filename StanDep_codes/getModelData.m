@@ -6,7 +6,7 @@ function [modelData] = getModelData(expressionData,model)
 % INPUTS:
 % % expressionData: a structure containing the entire expression data
                     % % gene: list of gene names
-                    % % value: a matrix whose each column
+                    % % valuebyTissue: a matrix whose each column
                         % % contains the expression of genes across a tissue/context and 
                         % % each row contains expression of a gene across
                         % % all tissues/contexts.
